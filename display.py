@@ -1,6 +1,7 @@
 import cv2
 import math
 import pprint
+import numpy as np
 path = r'C:\Users\admin\Desktop\PJAI.png' 
 img = cv2.imread(path)
 
@@ -333,6 +334,7 @@ else:
         closest_point_y = find_closest_point_by_i(y, common_elements)
         print(closest_point_y)
 
+
 if closest_point_x == (254,131): 
     x = 'A'
 elif closest_point_x == (344,149):
@@ -502,4 +504,45 @@ dijkstra = Dijkstra(graph, start_vertex= x)
 
 # Run the algorithm
 dijkstra.dijkstra()
-print(x, '->' ,y,':', dijkstra.build_path(y))
+Dijk = dijkstra.build_path(y)
+print(x, '->' ,y,':', Dijk)
+
+
+Arr = [(254,131), (344,149),(495,179), (495, 194), (366,262), (496,267), (370,277),(318,281), (289,433),
+       (336, 437), (460, 487),(373, 523),(263, 567), (493, 561),(462, 577), (408, 606) ]
+arr = ['A', 'B', 'C', 'D', 'E', 'F','G','H', 'I', 'J','K', 'L', 'M', 'N','O', 'P']
+dict_mapping = {}
+for i in range(len(Arr)):
+    dict_mapping[arr[i]] = Arr[i]
+
+result = []
+
+
+for i in Dijk:
+    # Kiểm tra nếu phần tử có trong cả hai mảng
+    if i in dict_mapping:
+        result.append(dict_mapping[i])
+
+if distance_to_A < distance_to_B:
+    result.insert(0, points[0])
+    result.insert(1,closest_point_in_A)
+    if distance_to_A1 < distance_to_B1:
+        result.append(closest_point_in_A1)
+        result.append(points[1])
+    else:
+        result.append(closest_point_in_B1)
+        result.append(points[1])
+else: 
+    result.insert(0, points[0])
+    result.insert(1,closest_point_in_B)
+    if distance_to_A1 < distance_to_B1:
+        result.append(closest_point_in_A1)
+        result.append(points[1])
+    else:
+        result.append(closest_point_in_B1)
+        result.append(points[1])
+p = np.array(result)
+cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=3)
+cv2.imshow('Image', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
