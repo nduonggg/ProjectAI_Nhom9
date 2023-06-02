@@ -1,6 +1,6 @@
 import cv2
 import math
-
+import pprint
 path = r'C:\Users\admin\Desktop\PJAI.png' 
 img = cv2.imread(path)
 
@@ -97,6 +97,32 @@ with open('diem_giao.txt', 'r') as f:
     for l in f:
         a9, b9 = map(int, l.strip().split('x'))
         M.append((a9, b9))
+
+def find_closest_point_by_j(x, arr): #tim diem giao gan nhat theo tung do
+    closest_point = None
+    min_distance = math.inf
+    
+    for point in arr:
+        if point[0] <= x[0]:  # nếu tung do cua x  không lớn hơn hoanh do cua giao diem thì bỏ qua 
+            continue
+        distance = math.sqrt((point[0]-x[0])**2 + (point[1]-x[1])**2)  # tính khoảng cách Euclid
+        if distance < min_distance:
+            min_distance = distance
+            closest_point = point
+    return closest_point
+
+def find_closest_point_by_i(x, arr): #tim diem giao gan nhat theo hoanh do
+    closest_point = None
+    min_distance = math.inf
+    
+    for point in arr:
+        if point[1] <= x[1]:  # nếu hoanh do cua x  không lớn hơn hoanh do cua giao diem thì bỏ qua 
+            continue
+        distance = math.sqrt((point[0]-x[0])**2 + (point[1]-x[1])**2)  # tính khoảng cách Euclid
+        if distance < min_distance:
+            min_distance = distance
+            closest_point = point
+    return closest_point
 #xet points[0]
 closest_point_in_A = min(A, key=lambda x: math.sqrt((x[0]-points[0][0])**2 + (x[1]-points[0][1])**2))
 
@@ -112,29 +138,95 @@ if distance_to_A < distance_to_B:
     x = closest_point_in_A
     if x in D:
         print("x thuoc duong 2_chieu1")
+        common_elements = []
+        for element in D:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
     elif x in E:
         print("x thuoc duong 2_chieu2")
+        common_elements = []
+        for element in E:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
     elif x in F:
         print("x thuoc duong 2_chieu3")
+        common_elements = []
+        for element in F:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
     elif x in G:
         print("x thuoc duong 2_chieu4")
+        common_elements = []
+        for element in G:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
     elif x in H:
         print("x thuoc duong 2_chieu5")
+        common_elements = []
+        for element in H:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
     elif x in I:
         print("x thuoc duong 2_chieu6")
+        common_elements = []
+        for element in I:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
     elif x in J:
-         print("x thuoc duong 2_chieu7")
+        print("x thuoc duong 2_chieu7")
+        common_elements = []
+        for element in J:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
     elif x in K:
         print("x thuoc duong 2_chieu8")
+        common_elements = []
+        for element in K:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
+        print(closest_point_x)
 else:
     print("point[0] thuoc duong 1 chieu:", closest_point_in_B)
     x = closest_point_in_B
     if x in P:
         print("x thuoc duong 1_chieu1")
+        common_elements = []
+        for element in P:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = find_closest_point_by_j(x, common_elements)
+        print(closest_point_x)
     elif x in Q:
         print("x thuoc duong 1_chieu2")
+        common_elements = []
+        for element in Q:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = find_closest_point_by_i(x, common_elements)
+        print(closest_point_x)
     elif x in C:
         print("x thuoc duong 1_chieu3")
+        common_elements = []
+        for element in C:
+            if element in M:
+                common_elements.append(element)
+        closest_point_x = find_closest_point_by_i(x, common_elements)
+        print(closest_point_x)
 
 #xet points[1]
 closest_point_in_A1 = min(A, key=lambda z: math.sqrt((z[0]-points[1][0])**2 + (z[1]-points[1][1])**2))
@@ -151,34 +243,263 @@ if distance_to_A1 < distance_to_B1:
     y = closest_point_in_A1
     if y in D:
         print("y thuoc duong 2_chieu1")
-        
+        common_elements = []
+        for element in D:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
     elif y in E:
         print("y thuoc duong 2_chieu2")
+        common_elements = []
+        for element in E:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
     elif y in F:
         print("y thuoc duong 2_chieu3")
+        common_elements = []
+        for element in F:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
     elif y in G:
         print("y thuoc duong 2_chieu4")
+        common_elements = []
+        for element in G:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
     elif y in H:
         print("y thuoc duong 2_chieu5")
+        common_elements = []
+        for element in H:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
     elif y in I:
         print("y thuoc duong 2_chieu6")
+        common_elements = []
+        for element in I:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
     elif y in J:
         print("y thuoc duong 2_chieu7")
+        common_elements = []
+        for element in J:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
     elif y in K:
         print("y thuoc duong 2_chieu8")
+        common_elements = []
+        for element in K:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = min(common_elements, key=lambda m: math.sqrt((m[0]-y[0])**2 + (m[1]-y[1])**2))
+        print(closest_point_y)
 else:
     print("point[1] thuoc duong 1 chieu:", closest_point_in_B1)
     y = closest_point_in_B1
     if y in P:
         print("y thuoc duong 1_chieu1")
+        common_elements = []
+        for element in P:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = find_closest_point_by_j(y, common_elements)
+        print(closest_point_y)
     elif y in Q:
         print("y thuoc duong 1_chieu2")
-
+        common_elements = []
+        for element in Q:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = find_closest_point_by_i(y, common_elements)
+        print(closest_point_y)
     elif y in C:
         print("y thuoc duong 1_chieu3")
+        common_elements = []
+        for element in C:
+            if element in M:
+                common_elements.append(element)
+        closest_point_y = find_closest_point_by_i(y, common_elements)
+        print(closest_point_y)
+
+if closest_point_x == (254,131): 
+    x = 'A'
+elif closest_point_x == (344,149):
+    x = 'B'
+elif closest_point_x == (495,179):
+    x = 'C'
+elif closest_point_x == (495, 194):
+    x = 'D'
+elif closest_point_x == (366,262):
+    x = 'E'
+elif closest_point_x == (496,267):
+    x = 'F'
+elif closest_point_x == (370,277):
+    x = 'G'
+elif closest_point_x == (318,281):
+    x = 'H'
+elif closest_point_x == (289,433):
+    x = 'I'
+elif closest_point_x == (336, 437):
+    x = 'J'
+elif closest_point_x == (460, 487):
+    x = 'K'
+elif closest_point_x == (373, 523):
+    x = 'L'
+elif closest_point_x == (263, 567):
+    x = 'M'
+elif closest_point_x == (493, 561):
+    x = 'N'
+elif closest_point_x == (462, 577):
+    x = 'O'
+elif closest_point_x == (408, 606):
+    x = 'P'
+
+if closest_point_y == (254,131): 
+    y = 'A'
+elif closest_point_y == (344,149):
+    y = 'B'
+elif closest_point_y == (495,179):
+   y = 'C'
+elif closest_point_y == (495, 194):
+    y= 'D'
+elif closest_point_y == (366,262):
+    y = 'E'
+elif closest_point_y == (496,267):
+    y = 'F'
+elif closest_point_y == (370,277):
+    y = 'G'
+elif closest_point_y == (318,281):
+    y = 'H'
+elif closest_point_y == (289,433):
+    y = 'I'
+elif closest_point_y == (336, 437):
+    y = 'J'
+elif closest_point_y == (460, 487):
+    y = 'K'
+elif closest_point_y == (373, 523):
+    y = 'L'
+elif closest_point_y == (263, 567):
+    y = 'M'
+elif closest_point_y == (493, 561):
+    y = 'N'
+elif closest_point_y == (462, 577):
+    y = 'O'
+elif closest_point_y == (408, 606):
+    y = 'P'
 
 
+class Dijkstra:
+    def __init__(self, graph, start_vertex):
+        self.graph = graph
+        self.start_vertex = start_vertex
+        self.vertices = list(graph.keys())
+
+        # distance: minimum distance from start vertex
+        self.vertex_labels = {vertex: {'distance': math.inf, 'prev': '-'} for vertex in self.vertices}
+
+        # Obviously, the start vertex has no distance from itself
+        self.vertex_labels[start_vertex]['distance'] = 0
 
 
+    def _get_edge_weight(self, vertex1, vertex2):
+        try:
+            return self.graph[vertex1][vertex2]
+        except KeyError:
+            return math.inf
 
 
+    def _set_label(self, vertex, weight, prev=''):
+        self.vertex_labels[vertex]['distance'] = weight
+
+        if prev:
+            self.vertex_labels[vertex]['prev'] = prev
+
+
+    def _get_label(self, vertex):
+        return self.vertex_labels[vertex]
+
+
+    def dijkstra(self):
+        interiors = [self.start_vertex]
+        max_interior_vertices = len(self.vertices)
+
+        while True:
+            exteriors = [vertex for vertex in self.vertices if vertex not in interiors]
+
+            # Nearest vertex to start vertex
+            nearest_vertex = '-'
+
+            # Distance from start index
+            nearest_vertex_distance = math.inf
+
+            for exterior in exteriors:
+                exterior_label = self._get_label(exterior)
+
+                # Shortest discovered distance of current outerior from start vertex
+                shortest_discovered_distance = exterior_label['distance']
+
+                # Last vertex through which we reached current exterior with shortest distance
+                choosen_prev = exterior_label['prev']
+
+                for interior in interiors:
+                    # Shortest discovered distance of current interior from start vertex + distance of current interior from current exterior
+                    distance_from_exterior = self._get_label(interior)['distance'] + self._get_edge_weight(interior, exterior)
+
+                    if distance_from_exterior < shortest_discovered_distance:
+                        shortest_discovered_distance = distance_from_exterior
+                        choosen_prev = interior
+            
+                self._set_label(exterior, shortest_discovered_distance, choosen_prev)
+
+                # Attempt to find the nearest exterior to start vertex
+                if shortest_discovered_distance < nearest_vertex_distance:
+                    nearest_vertex_distance = shortest_discovered_distance
+                    nearest_vertex = exterior
+            
+            interiors.append(nearest_vertex)
+
+            if len(interiors) == max_interior_vertices:
+                break
+
+
+    def build_path(self, vertex):
+        if vertex == '-':
+            return []
+        
+        return self.build_path(self.vertex_labels[vertex]['prev']) + [vertex]
+
+
+graph = {'A': {'B': 105.2,},
+         'B': {'A': 105.2, 'C': 156.7, 'E': 68.2},
+         'C': {'B': 156.7, 'D': 15},
+         'D': {'C': 15, 'E': 85.8, 'F': 27.5},
+         'E': {'B': 68.2, 'D': 85.8, 'G': 61.6},
+         'F': {'D': 27.5, 'G': 126.1, 'K': 30.5},
+         'G' : {'E': 61.6, 'H' : 28.3, 'K': 98.8},
+         'H' : {'B': 23.9},
+         'K': {'F': 30.5, 'G': 98.8, 'L' : 94.4, 'O': 54.8, 'N': 41},
+         'L': {'J': 91.1, 'M': 72.3, 'P': 77.7},
+         'M': {'I': 92.6},
+         'I': {'H': 152.9, 'J': 65.1},
+         'J': {'I': 65.1, 'L': 91.1},
+         'N': {'K': 41, 'O': 45.3},
+         'O': {'N': 45.3, 'K': 54.8, 'P': 59.8},
+         'P': {'L': 77.7, 'O': 59.8}}
+
+dijkstra = Dijkstra(graph, start_vertex= x)
+
+# Run the algorithm
+dijkstra.dijkstra()
+print(x, '->' ,y,':', dijkstra.build_path(y))
