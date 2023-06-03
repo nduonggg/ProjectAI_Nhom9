@@ -4,6 +4,10 @@ import pprint
 import numpy as np
 path = r'C:\Users\admin\Desktop\PJAI.png' 
 img = cv2.imread(path)
+location = cv2.imread(r'location.png') 
+destination = cv2.imread(r'destination.png')
+loc_w = 25 
+loc_h = 30
 
 cv2.namedWindow('Image')
  
@@ -22,6 +26,17 @@ while True:
         break
     cv2.waitKey(1)
 
+x_offset0, y_offset0 = points[0]
+x_offset0 = x_offset0 - int(loc_w/2)
+y_offset0 = y_offset0 - loc_h
+
+x_offset1, y_offset1 = points[1]
+x_offset1 = x_offset1 - int(loc_w/2)
+y_offset1 = y_offset1 - loc_h
+
+img[y_offset0:y_offset0+location.shape[0], x_offset0:x_offset0+location.shape[1]] = location
+img[y_offset1:y_offset1+destination.shape[0], x_offset1:x_offset1+destination.shape[1]] = destination    
+    
 print('Coordinate of point 1:', points[0])
 print('Coordinate of point 2:', points[1])
 
