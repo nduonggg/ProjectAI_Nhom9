@@ -540,22 +540,21 @@ for i in Dijk:
     if i in dict_mapping:
         result.append(dict_mapping[i])
 
-
+arr_list = [D,E,F,G,H,I,J,K]
+Arr_list = [P,Q,C]
 #hien thi len anh
-arr_list = [D, E, F, G, H, I, J, K]
-Arr_list = [P,Q,C] #mang duong 1 chieu
-for arr in arr_list:
-   if distance_to_A < distance_to_B: #diem 1 la duong 2 chieu
-        result.insert(0, points[0])
-        result.insert(1,closest_point_in_A)
-        if distance_to_A1 < distance_to_B1 : #diem 2 la duong 2 chieu
-            if closest_point_in_A1 in arr and closest_point_in_A in arr:
-                a = [points[0],closest_point_in_A1, closest_point_in_A,points[1]]
+if distance_to_A < distance_to_B: #diem 1 nam tren duong 2 chieu
+    result.insert(0, points[0])
+    result.insert(1,closest_point_in_A)
+    if distance_to_A1 < distance_to_B1 : #diem 2 nam tren duong 2 chieu
+        for arr in arr_list:
+            if closest_point_in_A1 in arr and closest_point_in_A in arr: #tren cung 1 duong
                 cv2.line(img, points[0], points[1], color=(0,0, 255), thickness=2)
                 cv2.imshow('Image', img)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
-            else:
+                exit()
+        else: #2 duong khac nhau
                 result.append(closest_point_in_A1)
                 result.append(points[1])
                 p = np.array(result)
@@ -564,7 +563,8 @@ for arr in arr_list:
                 cv2.imshow('Image', img)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
-        else:
+
+    else: #diem 2 nam tren duong 1 chieu
             result.append(closest_point_in_B1)
             result.append(points[1])
             p = np.array(result)
@@ -573,36 +573,43 @@ for arr in arr_list:
             cv2.imshow('Image', img)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
-for arr1 in Arr_list:
-    if distance_to_A > distance_to_B: #diem 1 la duong 1 chieu
-            result.insert(0, points[0])
-            result.insert(1,closest_point_in_B)
-            if distance_to_A1 < distance_to_B1: #diem 2 la duong 2 chieu
-                result.append(closest_point_in_A1)
-                result.append(points[1])
-                p = np.array(result)
-                print(result)
-                cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
-                cv2.imshow('Image', img)
-                cv2.waitKey(0)
-                cv2.destroyAllWindows()
-            else: #diem 2 la duong 1 chieu
-                if closest_point_in_B1 in arr1 and closest_point_in_B in arr1:
+else: #diem 1 thuoc duong 1 chieu
+    result.insert(0, points[0])
+    result.insert(1,closest_point_in_B)
+    if distance_to_A1 < distance_to_B1: #diem 2 thuoc duong 2 chieu
+        result.append(closest_point_in_A1)
+        result.append(points[1])
+        p = np.array(result)
+        print(result)
+        cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+        cv2.imshow('Image', img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    else: #diem 2 thuoc duong 1 chieu
+        for arr in Arr_list:
+            if closest_point_in_B1 in arr and closest_point_in_B in arr: #tren cung 1 duong
+                if closest_point_x == closest_point_y:
                     cv2.line(img, points[0], points[1], color=(0,0, 255), thickness=2)
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
+                    exit()
                 else:
                     result.append(closest_point_in_B1)
                     result.append(points[1])
-                    p = np.array(result)  
+                    p = np.array(result)
                     print(result)
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
-    else:
-        break
-    
-    
-    
+
+        else:
+                    result.append(closest_point_in_B1)
+                    result.append(points[1])
+                    p = np.array(result)
+                    print(result)
+                    cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.imshow('Image', img)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
