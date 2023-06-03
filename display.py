@@ -43,7 +43,7 @@ with open(path3, "r") as f:
         c, d = map(int, line.strip().split('x'))
         B.append((c, d))
 
-
+#mang luu toa do cac duong
 P = [] #1.1 
 Q = [] #1.2
 C = [] #1.3
@@ -104,7 +104,20 @@ def find_closest_point_by_j(x, arr): #tim diem giao gan nhat theo tung do
     min_distance = math.inf
     
     for point in arr:
-        if point[0] <= x[0]:  # nếu tung do cua x  không lớn hơn hoanh do cua giao diem thì bỏ qua 
+        if point[0] <= x[0]:  # nếu tung do cua x  không lớn hơn tung do cua giao diem thì bỏ qua 
+            continue
+        distance = math.sqrt((point[0]-x[0])**2 + (point[1]-x[1])**2)  # tính khoảng cách Euclid
+        if distance < min_distance:
+            min_distance = distance
+            closest_point = point
+    return closest_point
+
+def find_closest_point_by_j1(x, arr): #tim diem giao gan nhat theo tung do
+    closest_point = None
+    min_distance = math.inf
+    
+    for point in arr:
+        if point[0] >= x[0]:  # nếu tung do cua x  không lớn hơn tung do cua giao diem thì bỏ qua 
             continue
         distance = math.sqrt((point[0]-x[0])**2 + (point[1]-x[1])**2)  # tính khoảng cách Euclid
         if distance < min_distance:
@@ -124,6 +137,19 @@ def find_closest_point_by_i(x, arr): #tim diem giao gan nhat theo hoanh do
             min_distance = distance
             closest_point = point
     return closest_point
+
+def find_closest_point_by_i1(x, arr): #tim diem giao gan nhat theo hoanh do
+    closest_point = None
+    min_distance = math.inf
+    
+    for point in arr:
+        if point[1] >= x[1]:  # nếu hoanh do cua x  không lớn hơn hoanh do cua giao diem thì bỏ qua 
+            continue
+        distance = math.sqrt((point[0]-x[0])**2 + (point[1]-x[1])**2)  # tính khoảng cách Euclid
+        if distance < min_distance:
+            min_distance = distance
+            closest_point = point
+    return closest_point
 #xet points[0]
 closest_point_in_A = min(A, key=lambda x: math.sqrt((x[0]-points[0][0])**2 + (x[1]-points[0][1])**2))
 
@@ -135,10 +161,8 @@ distance_to_A = math.sqrt((closest_point_in_A[0]-points[0][0])**2 + (closest_poi
 distance_to_B = math.sqrt((closest_point_in_B[0]-points[0][0])**2 + (closest_point_in_B[1]-points[0][1])**2)
 
 if distance_to_A < distance_to_B:
-    print("point[0] thuoc duong 2 chieu:", closest_point_in_A)
     x = closest_point_in_A
     if x in D:
-        print("x thuoc duong 2_chieu1")
         common_elements = []
         for element in D:
             if element in M:
@@ -146,7 +170,6 @@ if distance_to_A < distance_to_B:
         closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
         print(closest_point_x)
     elif x in E:
-        print("x thuoc duong 2_chieu2")
         common_elements = []
         for element in E:
             if element in M:
@@ -154,7 +177,6 @@ if distance_to_A < distance_to_B:
         closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
         print(closest_point_x)
     elif x in F:
-        print("x thuoc duong 2_chieu3")
         common_elements = []
         for element in F:
             if element in M:
@@ -162,7 +184,6 @@ if distance_to_A < distance_to_B:
         closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
         print(closest_point_x)
     elif x in G:
-        print("x thuoc duong 2_chieu4")
         common_elements = []
         for element in G:
             if element in M:
@@ -170,7 +191,6 @@ if distance_to_A < distance_to_B:
         closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
         print(closest_point_x)
     elif x in H:
-        print("x thuoc duong 2_chieu5")
         common_elements = []
         for element in H:
             if element in M:
@@ -178,7 +198,6 @@ if distance_to_A < distance_to_B:
         closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
         print(closest_point_x)
     elif x in I:
-        print("x thuoc duong 2_chieu6")
         common_elements = []
         for element in I:
             if element in M:
@@ -186,7 +205,6 @@ if distance_to_A < distance_to_B:
         closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
         print(closest_point_x)
     elif x in J:
-        print("x thuoc duong 2_chieu7")
         common_elements = []
         for element in J:
             if element in M:
@@ -194,7 +212,6 @@ if distance_to_A < distance_to_B:
         closest_point_x = min(common_elements, key=lambda m: math.sqrt((m[0]-x[0])**2 + (m[1]-x[1])**2))
         print(closest_point_x)
     elif x in K:
-        print("x thuoc duong 2_chieu8")
         common_elements = []
         for element in K:
             if element in M:
@@ -315,7 +332,7 @@ else:
         for element in P:
             if element in M:
                 common_elements.append(element)
-        closest_point_y = find_closest_point_by_j(y, common_elements)
+        closest_point_y = find_closest_point_by_j1(y, common_elements)
         print(closest_point_y)
     elif y in Q:
         print("y thuoc duong 1_chieu2")
@@ -323,7 +340,7 @@ else:
         for element in Q:
             if element in M:
                 common_elements.append(element)
-        closest_point_y = find_closest_point_by_i(y, common_elements)
+        closest_point_y = find_closest_point_by_i1(y, common_elements)
         print(closest_point_y)
     elif y in C:
         print("y thuoc duong 1_chieu3")
@@ -331,11 +348,11 @@ else:
         for element in C:
             if element in M:
                 common_elements.append(element)
-        closest_point_y = find_closest_point_by_i(y, common_elements)
+        closest_point_y = find_closest_point_by_i1(y, common_elements)
         print(closest_point_y)
 
 
-if closest_point_x == (254,131): 
+if closest_point_x == (254,131): #diem giao
     x = 'A'
 elif closest_point_x == (344,149):
     x = 'B'
@@ -523,7 +540,9 @@ for i in Dijk:
     if i in dict_mapping:
         result.append(dict_mapping[i])
 
-if distance_to_A < distance_to_B:
+
+#hien thi len anh
+if distance_to_A < distance_to_B: 
     result.insert(0, points[0])
     result.insert(1,closest_point_in_A)
     if distance_to_A1 < distance_to_B1:
@@ -542,7 +561,8 @@ else:
         result.append(closest_point_in_B1)
         result.append(points[1])
 p = np.array(result)
-cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=3)
+print(result)
+cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
 cv2.imshow('Image', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
