@@ -604,12 +604,24 @@ if distance_to_A < distance_to_B: #diem 1 nam tren duong 2 chieu
         else: #2 duong khac nhau
                 result.append(closest_point_in_A1)
                 result.append(points[1])
+                i = len(result)
+                print(i)
                 p = np.array(result)
                 print(result)
-                cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
-                cv2.imshow('Image', img)
-                cv2.waitKey(0)
-                cv2.destroyAllWindows()
+                for arr in arr_list:
+                    if result[i-3] in arr and result[i-4] in arr and closest_point_in_A1 in arr:
+                        del result[i-3]
+                        p = np.array(result)
+                        cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                        cv2.imshow('Image', img)
+                        cv2.waitKey(0)
+                        cv2.destroyAllWindows()
+                        exit()
+                else:
+                    cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.imshow('Image', img)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
 
     else: #diem 2 nam tren duong 1 chieu
             result.append(closest_point_in_B1)
@@ -628,10 +640,27 @@ else: #diem 1 thuoc duong 1 chieu
         result.append(points[1])
         p = np.array(result)
         print(result)
-        cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
-        cv2.imshow('Image', img)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
+        i = len(result)
+        print(i)
+        for arr in arr_list:
+            if result[i-3] in arr and result[i-4] in arr:
+                if closest_point_in_A1 in arr:
+                    del result[i-3]
+                    print(result)
+                    p = np.array(result)
+                    cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.imshow('Image', img)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
+                    exit()
+                else:
+                    cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.imshow('Image', img)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
+                    exit()
+            
+            
     else: #diem 2 thuoc duong 1 chieu
         for arr in Arr_list:
             if closest_point_in_B1 in arr and closest_point_in_B in arr: #tren cung 1 duong
