@@ -4,10 +4,6 @@ import pprint
 import numpy as np
 path = r'C:\Users\admin\Desktop\PJAI.png' 
 img = cv2.imread(path)
-location = cv2.imread(r'location.png') 
-destination = cv2.imread(r'destination.png')
-loc_w = 25 
-loc_h = 30
 
 cv2.namedWindow('Image')
  
@@ -26,17 +22,6 @@ while True:
         break
     cv2.waitKey(1)
 
-x_offset0, y_offset0 = points[0]
-x_offset0 = x_offset0 - int(loc_w/2)
-y_offset0 = y_offset0 - loc_h
-
-x_offset1, y_offset1 = points[1]
-x_offset1 = x_offset1 - int(loc_w/2)
-y_offset1 = y_offset1 - loc_h
-
-img[y_offset0:y_offset0+location.shape[0], x_offset0:x_offset0+location.shape[1]] = location
-img[y_offset1:y_offset1+destination.shape[0], x_offset1:x_offset1+destination.shape[1]] = destination    
-    
 print('Coordinate of point 1:', points[0])
 print('Coordinate of point 2:', points[1])
 
@@ -596,7 +581,9 @@ if distance_to_A < distance_to_B: #diem 1 nam tren duong 2 chieu
     if distance_to_A1 < distance_to_B1 : #diem 2 nam tren duong 2 chieu
         for arr in arr_list:
             if closest_point_in_A1 in arr and closest_point_in_A in arr: #tren cung 1 duong
-                cv2.line(img, points[0], points[1], color=(0,0, 255), thickness=2)
+                cv2.line(img, points[0], points[1], color=(0, 0, 255), thickness=2)
+                cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+                cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
                 cv2.imshow('Image', img)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
@@ -613,12 +600,16 @@ if distance_to_A < distance_to_B: #diem 1 nam tren duong 2 chieu
                         del result[i-3]
                         p = np.array(result)
                         cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                        cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+                        cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
                         cv2.imshow('Image', img)
                         cv2.waitKey(0)
                         cv2.destroyAllWindows()
                         exit()
                 else:
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+                    cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
@@ -629,6 +620,8 @@ if distance_to_A < distance_to_B: #diem 1 nam tren duong 2 chieu
             p = np.array(result)
             print(result)
             cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+            cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+            cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
             cv2.imshow('Image', img)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
@@ -649,12 +642,16 @@ else: #diem 1 thuoc duong 1 chieu
                     print(result)
                     p = np.array(result)
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+                    cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
                     exit()
                 else:
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+                    cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
@@ -671,6 +668,8 @@ else: #diem 1 thuoc duong 1 chieu
                     p = np.array(result)
                     print(result)
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+                    cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
@@ -682,6 +681,8 @@ else: #diem 1 thuoc duong 1 chieu
                     p = np.array(result)
                     print(result)
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
+                    cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
+                    cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
