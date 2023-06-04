@@ -349,6 +349,18 @@ else:
                 common_elements.append(element)
         closest_point_y = find_closest_point_by_j1(y, common_elements)
         print(closest_point_y)
+        if x in P:
+            closest_point_y1 = find_closest_point_by_j(y, common_elements)
+            print(closest_point_y1)
+            if closest_point_x == closest_point_y1:
+                if points[0][0] < points[1][0]:
+                    cv2.line(img, points[0], points[1], color=(0,0, 255), thickness=2)
+                    cv2.imshow('Image', img)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
+                    exit()
+        
+
     elif y in Q:
         print("y thuoc duong 1_chieu2")
         common_elements = []
@@ -357,6 +369,16 @@ else:
                 common_elements.append(element)
         closest_point_y = find_closest_point_by_i1(y, common_elements)
         print(closest_point_y)
+        if x in Q:
+            closest_point_y1 = find_closest_point_by_i(y, common_elements)
+            print(closest_point_y1)
+            if closest_point_x == closest_point_y1:
+                if points[0][1] < points[1][1]:
+                    cv2.line(img, points[0], points[1], color=(0,0, 255), thickness=2)
+                    cv2.imshow('Image', img)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
+                    exit()
     elif y in C:
         print("y thuoc duong 1_chieu3")
         common_elements = []
@@ -365,6 +387,16 @@ else:
                 common_elements.append(element)
         closest_point_y = find_closest_point_by_i1(y, common_elements)
         print(closest_point_y)
+        if x in C:
+            closest_point_y1 = find_closest_point_by_i(y, common_elements)
+            print(closest_point_y1)
+            if closest_point_x == closest_point_y1:
+                if points[0][1] < points[1][1]:
+                    cv2.line(img, points[0], points[1], color=(0,0, 255), thickness=2)
+                    cv2.imshow('Image', img)
+                    cv2.waitKey(0)
+                    cv2.destroyAllWindows()
+                    exit()
 
 
 if closest_point_x == (254,131): #diem giao
@@ -603,13 +635,8 @@ else: #diem 1 thuoc duong 1 chieu
     else: #diem 2 thuoc duong 1 chieu
         for arr in Arr_list:
             if closest_point_in_B1 in arr and closest_point_in_B in arr: #tren cung 1 duong
-                if closest_point_x == closest_point_y:
-                    cv2.line(img, points[0], points[1], color=(0,0, 255), thickness=2)
-                    cv2.imshow('Image', img)
-                    cv2.waitKey(0)
-                    cv2.destroyAllWindows()
-                    exit()
-                else:
+                
+                if closest_point_x != closest_point_y:
                     result.append(closest_point_in_B1)
                     result.append(points[1])
                     p = np.array(result)
@@ -618,8 +645,9 @@ else: #diem 1 thuoc duong 1 chieu
                     cv2.imshow('Image', img)
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
+                    exit()
 
-        else:
+        else: #2 duong khac nhau
                     result.append(closest_point_in_B1)
                     result.append(points[1])
                     p = np.array(result)
