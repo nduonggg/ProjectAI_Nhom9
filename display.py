@@ -532,22 +532,22 @@ class Dijkstra:
         return self.build_path(self.vertex_labels[vertex]['prev']) + [vertex]
 
 
-graph = {'A': {'B': 105.2,},
-         'B': {'A': 105.2, 'C': 156.7, 'E': 68.2},
-         'C': {'B': 156.7, 'D': 15},
-         'D': {'C': 15, 'E': 85.8, 'F': 27.5},
-         'E': {'B': 68.2, 'D': 85.8, 'G': 61.6},
-         'F': {'D': 27.5, 'G': 126.1, 'K': 30.5},
-         'G' : {'E': 61.6, 'H' : 28.3, 'K': 98.8},
-         'H' : {'B': 23.9},
-         'K': {'F': 30.5, 'G': 98.8, 'L' : 94.4, 'O': 54.8, 'N': 41},
-         'L': {'J': 91.1, 'M': 72.3, 'P': 77.7},
-         'M': {'I': 92.6},
-         'I': {'H': 152.9, 'J': 65.1},
-         'J': {'I': 65.1, 'L': 91.1},
-         'N': {'K': 41, 'O': 45.3},
-         'O': {'N': 45.3, 'K': 54.8, 'P': 59.8},
-         'P': {'L': 77.7, 'O': 59.8}}
+graph = {'A': {'B': 91.78,},
+         'B': {'A': 91.78, 'C': 153.95, 'E': 115.12},
+         'C': {'B': 153.95, 'D': 15},
+         'D': {'C': 15, 'E': 145.83, 'F': 73.01},
+         'E': {'B': 115.12, 'D': 145.83, 'G': 15.52},
+         'F': {'D': 73.01, 'G': 126.4, 'K': 222.93},
+         'G' : {'E': 15.52, 'H' : 52.15, 'K': 228.47},
+         'H' : {'B': 134.54},
+         'K': {'F': 222.93, 'G': 228.47, 'L' : 94.15, 'O': 90.02, 'N': 81.02},
+         'L': {'J': 93.62, 'M': 118.47, 'P': 90.08},
+         'M': {'I': 136.5},
+         'I': {'H': 154.74, 'J': 47.17},
+         'J': {'I': 47.17, 'L': 93.62},
+         'N': {'K': 81.02, 'O': 34.89},
+         'O': {'N': 34.89, 'K': 90.02, 'P': 61.29},
+         'P': {'L': 90.08, 'O': 61.29}}
 
 dijkstra = Dijkstra(graph, start_vertex= x)
 
@@ -563,7 +563,7 @@ arr = ['A', 'B', 'C', 'D', 'E', 'F','G','H', 'I', 'J','K', 'L', 'M', 'N','O', 'P
 dict_mapping = {}
 for i in range(len(Arr)):
     dict_mapping[arr[i]] = Arr[i]
-
+print(dict_mapping)
 result = []
 
 
@@ -578,6 +578,10 @@ Arr_list = [P,Q,C]
 if distance_to_A < distance_to_B: #diem 1 nam tren duong 2 chieu
     result.insert(0, points[0])
     result.insert(1,closest_point_in_A)
+    print(result[2][0])
+    if result[2][0] <= points[0][0] <= result[3][0] and result[2][1] <= points[0][1] <= result[3][1]:
+        del result[2]
+        print('a')
     if distance_to_A1 < distance_to_B1 : #diem 2 nam tren duong 2 chieu
         for arr in arr_list:
             if closest_point_in_A1 in arr and closest_point_in_A in arr: #tren cung 1 duong
@@ -606,6 +610,7 @@ if distance_to_A < distance_to_B: #diem 1 nam tren duong 2 chieu
                         cv2.waitKey(0)
                         cv2.destroyAllWindows()
                         exit()
+                    
                 else:
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
                     cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
@@ -636,8 +641,7 @@ else: #diem 1 thuoc duong 1 chieu
         i = len(result)
         print(i)
         for arr in arr_list:
-            if result[i-3] in arr and result[i-4] in arr:
-                if closest_point_in_A1 in arr:
+            if result[i-3] in arr and result[i-4] in arr and closest_point_in_A1 in arr:
                     del result[i-3]
                     print(result)
                     p = np.array(result)
@@ -648,7 +652,7 @@ else: #diem 1 thuoc duong 1 chieu
                     cv2.waitKey(0)
                     cv2.destroyAllWindows()
                     exit()
-                else:
+            else:
                     cv2.polylines(img, [p], isClosed=False, color=(0,0, 255), thickness=2)
                     cv2.circle(img, points[0],radius=0, color=(0, 0, 255), thickness=10)
                     cv2.circle(img, points[1],radius=0, color=(0, 255, 0), thickness=10)
